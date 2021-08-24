@@ -1,0 +1,12 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/andreysdrv/movies-explorer-api.git",
+  "author": "andreysdrv <jeck666@mail.ru>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  }
+}
