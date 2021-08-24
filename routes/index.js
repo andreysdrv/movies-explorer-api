@@ -5,11 +5,16 @@ const auth = require('../middlewares/auth')
 
 const router = Router()
 
-// реализовать авторизацию и регистрацию
+// реализовать авторизацию, регистрацию, выход
 // router.post('/signup', userCreate)
 // router.post('/signin', userAuth)
+// router.post('/signout', userLogout)
 
 router.use('/movies', auth, moviesRouter)
 router.use('/users', auth, usersRouter)
+
+router.use('*', () => {
+  // throw new NotFound('Запрашиваемый ресурс не найден');
+});
 
 module.exports = router
