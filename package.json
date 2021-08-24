@@ -8,5 +8,11 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "celebrate": "^15.0.0",
+    "joi": "^17.4.2",
+    "mongoose": "^5.13.8",
+    "validator": "^13.6.0"
   }
 }
