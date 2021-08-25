@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
-const { linkRegExp } = require('../middlewares/validate')
+
+const linkRegExp = /(http:\/\/|https:\/\/)(www)*[a-z0-9\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+#*/;
 
 const movieSchema = new Schema({
   country: {

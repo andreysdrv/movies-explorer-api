@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const helmet = require('helmet')
 const router = require('./routes/index')
+const { errorHandler } = require('./helpers/errorHandler')
+const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 // const bodyParser = require('body-parser') // устарело? если да, то удалить из зависимостей
 
 const { PORT = 3000 } = process.env
@@ -23,6 +26,11 @@ mongoose.connect('mongodb://localhost:27017/diplomadb', { // заменить п
   useUnifiedTopology: true,
 });
 
+app.use(requestLogger)
 app.use(router)
+app.use(errorLogger)
+
+app.use(errors())
+app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`))

@@ -1,4 +1,7 @@
 const Movie = require('../models/movie')
+const NotFound = require('../errors/NotFound')
+const Forbidden = require('../errors/Forbidden')
+const { NOT_FOUND, FORBIDDEN } = require('../errors/errors')
 
 const getMovies = (req, res, next) => {
   Movie.find({})
@@ -13,9 +16,9 @@ const createMovie = (req, res, next) => {
   Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieI, owner })
     .then((movie) => res.send({ data: movie }))
     .catch((err) => {
-      // if (err.name === 'ValidationError') {
-      //   throw new BadRequest(err.message);
-      // }
+      if (err.name === 'ValidationError') {
+        throw new BadRequest(err.message);
+      }
     })
     .catch(next);
 };
@@ -27,14 +30,14 @@ const removeMovie = (req, res, next) => {
   Movie.findById(_id)
     .orFail()
     .catch(() => {
-      // throw new NotFound('Карточка с таким id не найдена');
+      throw new NotFound(NOT_FOUND);
     })
     .then((movie) => {
       if (movie.owner.toString() === movieId) {
         Movie.findByIdAndRemove(_id)
           .then((movieData) => res.send(movieData));
       } else {
-        // throw new Forbidden('Недостаточно прав!');
+        throw new Forbidden(FORBIDDEN);
       }
     })
     .catch(next);
