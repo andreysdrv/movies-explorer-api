@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const { Schema, model } = require('mongoose');
 const { isEmail } = require('validator');
 
@@ -25,5 +26,21 @@ const userSchema = new Schema({
     maxlength: 30,
   },
 })
+
+userSchema.statics.findUserByCredentials = function (email, password) {
+  return this.findOne({ email }).select('+password')
+    .then((user) => {
+      if (!user) {
+        // throw new Auth('Неправильные почта или пароль');
+      }
+      return bcrypt.compare(password, user.password)
+        .then((matched) => {
+          if (!matched) {
+            // throw new Auth('Неправильные почта или пароль');
+          }
+          return user;
+        });
+    });
+};
 
 module.exports = model('user', userSchema)

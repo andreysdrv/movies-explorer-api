@@ -1,5 +1,8 @@
+require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
+const helmet = require('helmet')
 const router = require('./routes/index')
 // const bodyParser = require('body-parser') // устарело? если да, то удалить из зависимостей
 
@@ -9,6 +12,9 @@ const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(helmet())
+app.use(cookieParser())
 
 mongoose.connect('mongodb://localhost:27017/diplomadb', { // заменить потом на moviesdb
   useNewUrlParser: true,
