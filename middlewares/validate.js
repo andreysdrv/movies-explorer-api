@@ -26,7 +26,7 @@ const movieValidation = celebrate({
     trailer: Joi.string().required().custom(customValidate),
     thumbnail: Joi.string().required().custom(customValidate),
     nameRU: Joi.string().required(),
-    nameEN: Joi.string().required()
+    nameEN: Joi.string().required(),
   }),
 });
 
@@ -49,5 +49,5 @@ module.exports = {
   idValidation,
   movieValidation,
   userValidation,
-  userAuthValidation
-}
+  userAuthValidation,
+};

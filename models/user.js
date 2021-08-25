@@ -1,8 +1,8 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const { Schema, model } = require('mongoose');
 const { isEmail } = require('validator');
-const { AUTH } = require('../errors/errors')
-const AuUnauthorizedErrorth = require('../errors/UnauthorizedError')
+const { AUTH } = require('../errors/errors');
+const AuUnauthorizedErrorth = require('../errors/UnauthorizedError');
 
 const userSchema = new Schema({
   email: {
@@ -11,9 +11,9 @@ const userSchema = new Schema({
     unique: true,
     validate: {
       validator(email) {
-        return isEmail(email)
-      }
-    }
+        return isEmail(email);
+      },
+    },
   },
   password: {
     type: String,
@@ -27,8 +27,9 @@ const userSchema = new Schema({
     minlength: 2,
     maxlength: 30,
   },
-})
+});
 
+// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
@@ -45,4 +46,4 @@ userSchema.statics.findUserByCredentials = function (email, password) {
     });
 };
 
-module.exports = model('user', userSchema)
+module.exports = model('user', userSchema);

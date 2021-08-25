@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
-const User = require('../models/user')
-const NotFound = require('../errors/NotFound')
-const BadRequest = require('../errors/BadRequest')
-const ConflictRequest = require('../errors/ConflictRequest')
-const { NOT_FOUND, CONFLICT } = require('../errors/errors')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const User = require('../models/user');
+const NotFound = require('../errors/NotFound');
+const BadRequest = require('../errors/BadRequest');
+const ConflictRequest = require('../errors/ConflictRequest');
+const { NOT_FOUND, CONFLICT } = require('../errors/errors');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -83,5 +83,5 @@ module.exports = {
   updateUser,
   userCreate,
   userAuth,
-  userLogout
-}
+  userLogout,
+};

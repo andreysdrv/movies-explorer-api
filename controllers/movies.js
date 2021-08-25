@@ -1,7 +1,9 @@
-const Movie = require('../models/movie')
-const NotFound = require('../errors/NotFound')
-const Forbidden = require('../errors/Forbidden')
-const { NOT_FOUND, FORBIDDEN } = require('../errors/errors')
+/* eslint-disable max-len */
+const Movie = require('../models/movie');
+const NotFound = require('../errors/NotFound');
+const Forbidden = require('../errors/Forbidden');
+const BadRequest = require('../errors/BadRequest');
+const { NOT_FOUND, FORBIDDEN } = require('../errors/errors');
 
 const getMovies = (req, res, next) => {
   Movie.find({})
@@ -10,10 +12,14 @@ const getMovies = (req, res, next) => {
 };
 
 const createMovie = (req, res, next) => {
-  const { country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieI } = req.body;
+  const {
+    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieI,
+  } = req.body;
   const owner = req.movie._id;
 
-  Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieI, owner })
+  Movie.create({
+    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieI, owner,
+  })
     .then((movie) => res.send({ data: movie }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -46,5 +52,5 @@ const removeMovie = (req, res, next) => {
 module.exports = {
   getMovies,
   createMovie,
-  removeMovie
-}
+  removeMovie,
+};
