@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const limiter = require('./helpers/limiter');
 const router = require('./routes/index');
 const { errorHandler } = require('./helpers/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -12,6 +13,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(limiter);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
