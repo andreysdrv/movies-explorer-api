@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/diplomadb', { // заменить потом на moviesdb
+mongoose.connect('mongodb://localhost:27017/moviesdb', { // заменить потом на moviesdb
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

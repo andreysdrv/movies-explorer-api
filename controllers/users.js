@@ -23,7 +23,7 @@ const updateUser = (req, res, next) => {
   const userId = req.user._id;
 
   User.findByIdAndUpdate(userId, { name, email }, { new: true, runValidators: true })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send({ user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequest(err.message);
@@ -42,7 +42,7 @@ const userCreate = (req, res, next) => {
       name, email, password: hash,
     }))
     .then((user) => res.send({
-      data: {
+      user: {
         name: user.name, email: user.email,
       },
     }))
