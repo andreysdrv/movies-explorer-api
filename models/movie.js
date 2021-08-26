@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-// eslint-disable-next-line no-useless-escape
-const linkRegExp = /(http:\/\/|https:\/\/)(www)*[a-z0-9\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+#*/;
+const linkRegExp = /(http:\/\/|https:\/\/)(www)*[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]+#*/;
 
 const movieSchema = new Schema({
   country: {
@@ -57,9 +56,10 @@ const movieSchema = new Schema({
     required: true,
   },
   movieId: {
-    type: Schema.Types.ObjectId,
+    type: Number,
     ref: 'movie',
     required: true,
+    unique: true,
   },
   nameRU: {
     type: String,
