@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const { CURRENT_PORT, CURRENT_BD_ADRESS } = require('./configs/index');
 const limiter = require('./helpers/limiter');
 const router = require('./routes/index');
 const { errorHandler } = require('./helpers/errorHandler');
@@ -13,10 +14,9 @@ const ALLOWED_CORS = [
   'https://api.movies-explorer.sdrv.nomoredomains.club',
   'localhost:3000',
 ];
-const { PORT = 3000 } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/moviesdb', {
+mongoose.connect(CURRENT_BD_ADRESS, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -53,4 +53,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT);
+app.listen(CURRENT_PORT);
