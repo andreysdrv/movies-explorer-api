@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const { Schema, model } = require('mongoose');
 const { isEmail } = require('validator');
 const { AUTH } = require('../utils/constants');
-const AuUnauthorizedErrorth = require('../errors/UnauthorizedError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
 const { IS_NOT_EMAIL } = require('../utils/constants');
 
 const userSchema = new Schema({
@@ -31,20 +31,22 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.statics.findUserByCredentials = function (email, password) {
+function findUserByCredentials(email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new AuUnauthorizedErrorth(AUTH);
+        throw new UnauthorizedError(AUTH);
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            throw new AuUnauthorizedErrorth(AUTH);
+            throw new UnauthorizedError(AUTH);
           }
           return user;
         });
     });
-};
+}
+
+userSchema.statics.findUserByCredentials = findUserByCredentials;
 
 module.exports = model('user', userSchema);
