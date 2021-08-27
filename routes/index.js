@@ -5,7 +5,7 @@ const auth = require('../middlewares/auth');
 const { userAuthValidation, userValidation } = require('../middlewares/validate');
 const { userCreate, userAuth, userLogout } = require('../controllers/users');
 const { NotFound } = require('../errors/NotFound');
-const { NOT_FOUND } = require('../errors/errors');
+const { NOT_FOUND } = require('../utils/constants');
 
 const router = Router();
 

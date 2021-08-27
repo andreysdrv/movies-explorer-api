@@ -2,7 +2,7 @@ const Movie = require('../models/movie');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
 const BadRequest = require('../errors/BadRequest');
-const { NOT_FOUND, FORBIDDEN } = require('../errors/errors');
+const { NOT_FOUND, FORBIDDEN } = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
   Movie.find({})

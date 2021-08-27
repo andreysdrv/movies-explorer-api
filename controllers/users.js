@@ -4,8 +4,9 @@ const User = require('../models/user');
 const NotFound = require('../errors/NotFound');
 const BadRequest = require('../errors/BadRequest');
 const ConflictRequest = require('../errors/ConflictRequest');
-const { NOT_FOUND, CONFLICT } = require('../errors/errors');
+const { NOT_FOUND, CONFLICT } = require('../utils/constants');
 const { CURRENT_JWT_SECRET } = require('../configs/index');
+const { AUTH_SUCCES, LOGOUT_SUCCES } = require('../utils/constants');
 
 const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -68,13 +69,13 @@ const userAuth = (req, res, next) => {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
       })
-        .send({ message: 'Авторизация прошла успешно!' });
+        .send({ message: AUTH_SUCCES });
     })
     .catch(next);
 };
 
 const userLogout = (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Вы успешно разлогинились' });
+  res.clearCookie('jwt').send({ message: LOGOUT_SUCCES });
 };
 
 module.exports = {

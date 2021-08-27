@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const { Schema, model } = require('mongoose');
 const { isEmail } = require('validator');
-const { AUTH } = require('../errors/errors');
+const { AUTH } = require('../utils/constants');
 const AuUnauthorizedErrorth = require('../errors/UnauthorizedError');
+const { IS_NOT_EMAIL } = require('../utils/constants');
 
 const userSchema = new Schema({
   email: {
@@ -13,7 +14,7 @@ const userSchema = new Schema({
       validator(email) {
         return isEmail(email);
       },
-      message: 'Введён невалидный email',
+      message: IS_NOT_EMAIL,
     },
   },
   password: {

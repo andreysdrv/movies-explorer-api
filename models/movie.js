@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { IS_NOT_URL } = require('../utils/constants');
 
 const linkRegExp = /(http:\/\/|https:\/\/)(www)*[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]+#*/;
 
@@ -30,7 +31,7 @@ const movieSchema = new Schema({
       validator(link) {
         return linkRegExp.test(link);
       },
-      message: 'Введён некорректный url',
+      message: IS_NOT_URL,
     },
   },
   trailer: {
@@ -40,7 +41,7 @@ const movieSchema = new Schema({
       validator(link) {
         return linkRegExp.test(link);
       },
-      message: 'Введён некорректный url',
+      message: IS_NOT_URL,
     },
   },
   thumbnail: {
@@ -50,7 +51,7 @@ const movieSchema = new Schema({
       validator(link) {
         return linkRegExp.test(link);
       },
-      message: 'Введён некорректный url',
+      message: IS_NOT_URL,
     },
   },
   owner: {
