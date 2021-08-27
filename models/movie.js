@@ -30,6 +30,7 @@ const movieSchema = new Schema({
       validator(link) {
         return linkRegExp.test(link);
       },
+      message: 'Введён некорректный url',
     },
   },
   trailer: {
@@ -39,6 +40,7 @@ const movieSchema = new Schema({
       validator(link) {
         return linkRegExp.test(link);
       },
+      message: 'Введён некорректный url',
     },
   },
   thumbnail: {
@@ -48,6 +50,7 @@ const movieSchema = new Schema({
       validator(link) {
         return linkRegExp.test(link);
       },
+      message: 'Введён некорректный url',
     },
   },
   owner: {

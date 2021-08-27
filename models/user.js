@@ -13,6 +13,7 @@ const userSchema = new Schema({
       validator(email) {
         return isEmail(email);
       },
+      message: 'Введён невалидный email',
     },
   },
   password: {
