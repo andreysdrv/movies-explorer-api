@@ -9,7 +9,6 @@ const { NOT_FOUND } = require('../errors/errors');
 
 const router = Router();
 
-// реализовать авторизацию, регистрацию, выход
 router.post('/signup', userValidation, userCreate);
 router.post('/signin', userAuthValidation, userAuth);
 router.post('/signout', userLogout);
