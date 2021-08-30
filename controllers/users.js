@@ -28,6 +28,7 @@ const updateUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         throw new BadRequest(err.message);
       }
+      throw err;
     })
     .catch(next);
 };
@@ -50,6 +51,7 @@ const userCreate = (req, res, next) => {
       if (err.name === 'MongoError' && err.code === 11000) {
         throw new ConflictRequest(CONFLICT);
       }
+      throw err;
     })
     .catch(next);
 };
