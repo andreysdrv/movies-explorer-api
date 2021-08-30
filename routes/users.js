@@ -4,7 +4,7 @@ const { idValidation, userUpdateValidation } = require('../middlewares/validate'
 
 const usersRouter = Router();
 
-usersRouter.get('/me', idValidation, getCurrentUser);
-usersRouter.patch('/me', userUpdateValidation, updateUser);
+usersRouter.get('/users/me', idValidation, getCurrentUser);
+usersRouter.patch('/users/me', userUpdateValidation, updateUser);
 
 module.exports = usersRouter;
