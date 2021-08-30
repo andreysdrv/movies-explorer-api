@@ -11,9 +11,7 @@ const { AUTH_SUCCES, LOGOUT_SUCCES } = require('../utils/constants');
 const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail()
-    .catch(() => {
-      throw new NotFound(NOT_FOUND);
-    })
+    .catch(() => next(new NotFound(NOT_FOUND)))
     .then((currentUser) => res.send({ currentUser }))
     .catch(next);
 };

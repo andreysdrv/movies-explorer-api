@@ -1,8 +1,7 @@
 const Movie = require('../models/movie');
-const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
 const BadRequest = require('../errors/BadRequest');
-const { NOT_FOUND, FORBIDDEN } = require('../utils/constants');
+const { FORBIDDEN, BAD_REQUEST } = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
   Movie.find({})
@@ -56,9 +55,7 @@ const removeMovie = (req, res, next) => {
 
   Movie.findById(_id)
     .orFail()
-    .catch(() => {
-      throw new NotFound(NOT_FOUND);
-    })
+    .catch(() => next(new BadRequest(BAD_REQUEST)))
     .then((movie) => {
       if (movie.owner.toString() === ownerId) {
         return Movie.findByIdAndRemove(_id)
