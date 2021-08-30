@@ -61,11 +61,10 @@ const removeMovie = (req, res, next) => {
     })
     .then((movie) => {
       if (movie.owner.toString() === ownerId) {
-        Movie.findByIdAndRemove(_id)
+        return Movie.findByIdAndRemove(_id)
           .then((movieData) => res.send(movieData));
-      } else {
-        throw new Forbidden(FORBIDDEN);
       }
+      throw new Forbidden(FORBIDDEN);
     })
     .catch(next);
 };
