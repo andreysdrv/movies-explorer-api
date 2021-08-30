@@ -16,7 +16,7 @@ router.post('/signout', userLogout);
 router.use('/movies', auth, moviesRouter);
 router.use('/users', auth, usersRouter);
 
-router.use('*', () => {
+router.use('*', auth, () => {
   throw new NotFound(NOT_FOUND);
 });
 
